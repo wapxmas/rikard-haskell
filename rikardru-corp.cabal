@@ -1,0 +1,316 @@
+name:                rikardru-corp
+version:             0.1.0.0
+synopsis:            Initial project template from stack
+description:         Please see README.md
+homepage:            https://github.com/wapxmas/rikardru-corp#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Sergey N. Yashin
+maintainer:          yashin.sergey@gmail.com
+copyright:           2016 Sergey N. Yashin
+category:            Web
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     RikardCorp.Handlers.Index
+                     , RikardCorp.Handlers.Articles
+                     , RikardCorp.Handlers.Contacts
+                     , RikardCorp.Handlers.News
+                     , RikardCorp.Handlers.Additions
+                     , RikardCorp.Handlers.Letter
+                     , RikardCorp.Handlers.Fraud
+                     , RikardCorp.Handlers.Main
+                     , RikardCorp.Handlers.Favicon
+                     , RikardCorp.Handlers.Robots
+                     , RikardCorp.Foundation
+                     , RikardCorp.Static
+                     , RikardCorp.Types
+                     , RikardCorp.Widgets
+                     , RikardCorp.DBTypes
+                     , RikardCorp.DBEnum
+                     , RikardCorp.DBConnection
+                     , RikardCorp.Helpers.DateTime
+                     , RikardCorp.Helpers.Html
+                     , RikardCorp.Helpers.Exceptions
+                     , RikardCorp.Helpers.Text
+                     , RikardCorp.Helpers.IO
+                     , RikardCorp.Helpers.NLP.Text
+                     , RikardCorp.Helpers.SqlTags
+                     , RikardCorp.Helpers.Sql
+                     , RikardCorp.Helpers.Text.Textile
+                     , RikardCorp.Helpers.Internal.News
+                     , RikardCorp.Helpers.Networking
+                     , RikardCorp.Init
+                     , RikardCorp.Helpers.Internal.Articles
+                     , RikardCorp.Helpers.Email
+                     , RikardCorp.Helpers.Json
+                     , RikardCorp.Helpers.Geo
+  build-depends:       base
+                     , yesod
+                     , data-default
+                     , file-embed
+                     , yesod-static
+                     , hjsmin
+                     , text
+                     , time
+                     , basic-prelude
+                     , persistent-mysql
+                     , persistent
+                     , persistent-template
+                     , tagsoup
+                     , html-entities
+                     , lifted-base
+                     , monad-control
+                     , resourcet
+                     , transformers
+                     , mystem
+                     , pstemmer
+                     , unordered-containers
+                     , hashtables >= 1.2 && < 1.4
+                     , regex-pcre-builtin
+                     , pandoc >= 1.17 && < 1.20
+                     , monad-logger >= 0.3 && < 0.6
+                     , directory >= 1.2 && < 1.5
+                     , filepath >= 1.4 && < 1.7
+                     , blaze-html >= 0.8 && < 1.0
+                     , http-types >= 0.9 && < 1.3
+                     , blaze-builder >= 0.4 && < 0.7
+                     , bytestring >= 0.10 && < 0.13
+                     , http-client-tls >= 0.2 && < 0.5
+                     , connection >= 0.2 && < 0.5
+                     , http-client >= 0.4 && < 0.7
+                     , warp >= 3.2 && < 3.5
+                     , shakespeare >= 2.0 && < 2.3
+                     , yesod-form >= 1.4 && < 1.7
+                     , HaskellNet >= 0.5 && < 0.8
+                     , HaskellNet-SSL >= 0.3 && < 0.6
+                     , mime-mail >= 0.4 && < 0.7
+                     , containers >= 0.5 && < 0.8
+                     , aeson >= 0.11 && < 0.14
+                     , vector >= 0.11 && < 0.14
+                     , attoparsec >= 0.13 && < 0.16
+                     , gps >= 1.2 && < 1.5
+                     , conduit >= 1.2 && < 1.5
+                     , http-conduit >= 2.1 && < 2.4
+                     , conduit-extra >= 1.1 && < 1.4
+                     , network-uri >= 2.6 && < 3.0
+  default-language:    Haskell2010
+  ghc-options:         -W -Wall
+  if os(windows)
+    cpp-options: -DWindows
+
+executable update-adverts-exe
+  hs-source-dirs:      app-update-adverts
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , http-client-tls >= 0.2 && < 0.5
+                     , connection >= 0.2 && < 0.5
+                     , text >= 1.2 && < 1.5
+                     , filepath >= 1.4 && < 1.7
+                     , bytestring >= 0.10 && < 0.13
+                     , aeson >= 0.11 && < 0.14
+                     , containers >= 0.5 && < 0.8
+                     , vector >= 0.11 && < 0.14
+                     , transformers >= 0.4 && < 0.7
+                     , hxt >= 9.3 && < 9.6
+                     , utf8-string >= 1.0 && < 1.3
+                     , HandsomeSoup >= 0.4 && < 0.7
+                     , attoparsec >= 0.13 && < 0.16
+                     , gps >= 1.2 && < 1.5
+                     , hashtables >= 1.2 && < 1.4
+                     , xml-types >= 0.3 && < 0.7
+                     , xml-conduit >= 1.3 && < 1.7
+                     , conduit >= 1.2 && < 1.6
+                     , directory >= 1.2 && < 1.6
+                     , time >= 1.6 && < 2.0
+                     , basic-prelude >= 0.6 && < 0.10
+  default-language:    Haskell2010
+
+executable migrate-geo-exe
+  hs-source-dirs:      app-migrate-geo
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , http-client-tls >= 0.2 && < 0.5
+                     , connection >= 0.2 && < 0.5
+                     , text >= 1.2 && < 1.5
+                     , filepath >= 1.4 && < 1.7
+                     , bytestring >= 0.10 && < 0.13
+                     , aeson >= 0.11 && < 0.14
+                     , containers >= 0.5 && < 0.8
+                     , vector >= 0.11 && < 0.14
+                     , transformers >= 0.4 && < 0.7
+                     , hxt >= 9.3 && < 9.6
+                     , utf8-string >= 1.0 && < 1.3
+                     , HandsomeSoup >= 0.4 && < 0.7
+                     , attoparsec >= 0.13 && < 0.16
+                     , gps >= 1.2 && < 1.5
+                     , hashtables >= 1.2 && < 1.4
+  default-language:    Haskell2010
+
+executable update-twitter-exe
+  hs-source-dirs:      app-update-twitter
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , twitter-conduit >= 0.2 && < 0.5
+                     , http-client-tls >= 0.2 && < 0.5
+                     , connection >= 0.2 && < 0.5
+                     , random >= 1.1 && < 1.4
+                     , text >= 1.2 && < 1.5
+                     , time >= 1.5 && < 1.8
+                     , lens >= 4.13 && < 4.17
+                     , twitter-types-lens >= 0.7 && < 1.0
+                     , filepath >= 1.4 && < 1.7
+                     , temporary >= 1.2 && < 1.5
+                     , bytestring >= 0.10 && < 0.13
+  default-language:    Haskell2010
+
+executable update-news-exe
+  hs-source-dirs:      app-update-news
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , hxt >= 9.3 && < 9.6
+                     , utf8-string >= 1.0 && < 1.3
+                     , http-conduit >= 2.1 && < 2.4
+                     , http-types >= 0.9 && < 1.3
+                     , HaskellNet >= 0.5 && < 0.8
+                     , HaskellNet-SSL >= 0.3 && < 0.6
+                     , bytestring >= 0.10 && < 0.13
+                     , connection >= 0.2 && < 0.5
+                     , text >= 1.2 && < 1.5
+                     , HandsomeSoup >= 0.4 && < 0.7
+                     , unordered-containers >= 0.2 && < 0.5
+                     , blaze-html >= 0.8 && < 1.0
+                     , time >= 1.5 && < 1.8
+                     , transformers >= 0.4 && < 0.7
+                     , directory >= 1.2 && < 1.5
+                     , filepath >= 1.4 && < 1.7
+  default-language:    Haskell2010
+
+executable rikardru-corp-exe
+  hs-source-dirs:      app-rikardru-corp
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , warp >= 3.2 && < 3.5
+  default-language:    Haskell2010
+
+executable rikardru-corp-cgi-exe
+  hs-source-dirs:      app-rikardru-corp-cgi
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , wai-extra >= 3.0 && < 3.3
+  default-language:    Haskell2010
+
+executable migrate-news-exe
+  hs-source-dirs:      app-migrate-news
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , transformers
+                     , persistent-template
+                     , time
+                     , text
+                     , tagsoup
+                     , html-entities
+  default-language:    Haskell2010
+
+executable migrate-articles-exe
+  hs-source-dirs:      app-migrate-articles
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , transformers
+                     , persistent-template
+                     , time
+                     , text
+                     , tagsoup
+                     , html-entities
+  default-language:    Haskell2010
+
+executable format-news-exe
+  hs-source-dirs:      app-format-news
+  main-is:             Main.hs
+  ghc-options:         -W -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , rikardru-corp
+                     , yesod
+                     , data-default
+                     , yesod-static
+                     , persistent-mysql
+                     , persistent
+                     , monad-logger
+                     , resourcet
+                     , transformers
+                     , persistent-template
+                     , time
+                     , text
+                     , tagsoup
+                     , html-entities
+                     , unordered-containers
+                     , filepath
+                     , directory
+                     , pstemmer
+                     , mystem
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: http://wapxmas@138.201.91.141:3000/wapxmas/rikardru-corp
